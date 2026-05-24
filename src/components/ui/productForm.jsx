@@ -1,12 +1,17 @@
 import { useState } from "react";
 
-export default function ProductForm({ onSubmit, onCancel }) {
+export default function ProductForm({
+    onSubmit,
+    onCancel,
+    initialData = null,
+}) {
     const [formData, setFormData] = useState({
-        name: "",
-        price: "",
-        category: "",
-        description: "",
-        inStock: true,
+        name: initialData?.name || "",
+        price: initialData?.price || "",
+        category: initialData?.category || "",
+        description: initialData?.description || "",
+        inStock:
+            initialData?.inStock !== undefined ? initialData?.inStock : true,
     });
 
     const handleChange = (e) => {
@@ -30,7 +35,7 @@ export default function ProductForm({ onSubmit, onCancel }) {
             className="bg-white p-6 border border-slate-200 rounded-sm shadow-sm mb-6"
         >
             <h2 className="text-lg font-bold text-slate-800 mb-4">
-                Add New Product
+                {initialData ? "Edit Product" : "Add New Product"}
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
@@ -117,7 +122,7 @@ export default function ProductForm({ onSubmit, onCancel }) {
                     type="submit"
                     className="px-4 py-2 text-sm font-medium text-white bg-slate-800 hover:bg-slate-700 rounded-sm transition-colors"
                 >
-                    Save Product
+                    {initialData ? "Update Product" : "Save Product"}
                 </button>
             </div>
         </form>

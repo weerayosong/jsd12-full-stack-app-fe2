@@ -1,4 +1,4 @@
-export default function ProductTable({ data, onDelete }) {
+export default function ProductTable({ data, onEdit, onDelete }) {
     if (data.length === 0) {
         return (
             <div className="p-8 text-center text-slate-500">
@@ -47,7 +47,13 @@ export default function ProductTable({ data, onDelete }) {
                                     </span>
                                 )}
                             </td>
-                            <td className="px-6 py-4 text-center">
+                            <td className="px-6 py-4 text-center space-x-3">
+                                <button
+                                    onClick={() => onEdit(item)}
+                                    className="text-slate-600 hover:text-slate-800 font-medium transition-colors text-xs"
+                                >
+                                    Edit
+                                </button>
                                 <button
                                     onClick={() => onDelete(item._id)}
                                     className="text-red-500 hover:text-red-700 font-medium px-2 py-1 transition-colors text-xs"

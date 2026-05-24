@@ -23,10 +23,11 @@ export const useProducts = () => {
         fetchProducts(); // eslint-disable-line react-hooks/set-state-in-effect
     }, []);
 
+    // CREATE
     const addProduct = async (formData) => {
         try {
             await ProductService.create(formData); // create
-            fetchProducts(); // done, then refetch
+            fetchProducts(); // create done, then refetch
             return true;
         } catch (err) {
             alert("Error adding product: " + err.message);
@@ -34,6 +35,19 @@ export const useProducts = () => {
         }
     };
 
+    // UPDATE
+    const updateProduct = async (id, formData) => {
+        try {
+            await ProductService.update(id, formData);
+            fetchProducts(); // update done, then refetch
+            return true;
+        } catch (err) {
+            alert("Error updating product: " + err.message);
+            return false;
+        }
+    };
+
+    // DELETE
     const deleteProduct = async (id) => {
         if (!window.confirm("Are you sure you want to delete this product?"))
             return;
@@ -46,5 +60,12 @@ export const useProducts = () => {
         }
     };
 
-    return { products, isLoading, error, addProduct, deleteProduct };
+    return {
+        products,
+        isLoading,
+        error,
+        addProduct,
+        updateProduct,
+        deleteProduct,
+    };
 };

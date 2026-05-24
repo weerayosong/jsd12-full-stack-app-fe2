@@ -4,15 +4,39 @@ import ProductForm from "../components/ui/ProductForm";
 import ProductTable from "../components/ui/ProductTable";
 
 export default function Products() {
-    const { products, isLoading, error, addProduct, deleteProduct } =
-        useProducts();
+    const {
+        products,
+        isLoading,
+        error,
+        addProduct,
+        updateProduct,
+        deleteProduct,
+    } = useProducts();
     const [showForm, setShowForm] = useState(false);
 
-    const handleCreateProduct = async (formData) => {
-        const success = await addProduct(formData);
-        if (success) {
-            setShowForm(false);
+    const [editingProduct, setEditingProduct] = useState(null);
+
+    const handleCloseForm = () => {
+        setShowForm(false);
+        setEditingProduct(null);
+    };
+
+    const handleEditClick = (product) => {
+        setEditingProduct(product);
+        setShowForm(true);
+    };
+
+    const handleSubmit = async (formData) => {
+        let success;
+        if (editingProduct) {
+            // โหมดแก้ไข
+            success = await updateProduct(editingProduct._id, formData);
+        } else {
+            // โหมดสร้างใหม่
+            success = await addProduct(formData);
         }
+
+        if (success) handleCloseForm();
     };
 
     return (
@@ -38,8 +62,10 @@ export default function Products() {
 
             {showForm && (
                 <ProductForm
-                    onSubmit={handleCreateProduct}
-                    onCancel={() => setShowForm(false)}
+                    key={editingProduct ? editingProduct._id : "new_product"}
+                    initialData={editingProduct}
+                    onSubmit={handleSubmit}
+                    onCancel={handleCloseForm}
                 />
             )}
 
@@ -52,7 +78,11 @@ export default function Products() {
                     {error}
                 </div>
             ) : (
-                <ProductTable data={products} onDelete={deleteProduct} />
+                <ProductTable
+                    data={products}
+                    onEdit={handleEditClick}
+                    onDelete={deleteProduct}
+                />
             )}
         </div>
     );
