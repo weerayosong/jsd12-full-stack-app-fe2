@@ -9,14 +9,14 @@ https://miro.com/app/board/uXjVHPZzDKc=/?share_link_id=896228414033
 
 ## Concept UI Design
 
-![crud dashboard that use routes and resources from my api server and db](./app2.png)
+![crud dashboard that use routes and resources from my api server and db](public/app2.png)
 
 ## User Dashboard with API Server
 
 - All CRUD Routes from Users, Products, and Notes.
 - MongoDB.
 - Bcrypt.
-- full Authentication routes and controllers.
+- Full Authentication routes and controllers.
 
 ## Overview
 
