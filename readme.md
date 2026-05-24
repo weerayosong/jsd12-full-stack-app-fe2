@@ -1,4 +1,4 @@
-# JSD12 Week12 | Full Stack App (Frontend) II
+# JSD12 Week13 | Full Stack App (Frontend) II
 
 Backend Repo: https://github.com/weerayosong/jsd12-full-stack-app-be (Branch: phase-06_bcrypt)
 

@@ -5,27 +5,46 @@ export const useProducts = () => {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-    useEffect(() => {
-        const fetchProducts = async () => {
-            setIsLoading(true);
-            try {
-                const data = await ProductService.getAll();
-                setProducts(data);
-                setError(null);
-            } catch (err) {
-                setError(err.message || "Failed to fetch products");
-            } finally {
-                setIsLoading(false);
-            }
-        };
 
-        fetchProducts();
-    }, []);
-
-    // mock del
-    const deleteProduct = (id) => {
-        setProducts(products.filter((p) => p._id !== id));
+    const fetchProducts = async () => {
+        setIsLoading(true);
+        try {
+            const data = await ProductService.getAll();
+            setProducts(data);
+            setError(null);
+        } catch (err) {
+            setError(err.message || "Failed to fetch products");
+        } finally {
+            setIsLoading(false);
+        }
     };
 
-    return { products, isLoading, error, deleteProduct };
+    useEffect(() => {
+        fetchProducts(); // eslint-disable-line react-hooks/set-state-in-effect
+    }, []);
+
+    const addProduct = async (formData) => {
+        try {
+            await ProductService.create(formData); // create
+            fetchProducts(); // done, then refetch
+            return true;
+        } catch (err) {
+            alert("Error adding product: " + err.message);
+            return false;
+        }
+    };
+
+    const deleteProduct = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this product?"))
+            return;
+
+        try {
+            await ProductService.delete(id);
+            setProducts(products.filter((p) => p._id !== id));
+        } catch (err) {
+            alert("Error deleting product: " + err.message);
+        }
+    };
+
+    return { products, isLoading, error, addProduct, deleteProduct };
 };
