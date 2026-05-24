@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Login from "./pages/Login";
+import ProductsPage from "./pages/Products";
 import MainLayout from "./components/layout/MainLayout";
 
 // mock dashboard for test mock login first page
@@ -21,12 +22,12 @@ const Dashboard = () => (
         </p>
     </div>
 );
-const Products = () => (
-    <div>
-        <h1 className="text-2xl font-bold">Products</h1>
-        <p>Qui-Gon Jinn is the best.</p>
-    </div>
-);
+// const Products = () => (
+//     <div>
+//         <h1 className="text-2xl font-bold">Products</h1>
+//         <p>Qui-Gon Jinn is the best.</p>
+//     </div>
+// );
 const Users = () => (
     <div>
         <h1 className="text-2xl font-bold">Users</h1>
@@ -56,7 +57,10 @@ function App() {
                                 element={<Navigate to="/dashboard" replace />}
                             />
                             <Route path="/dashboard" element={<Dashboard />} />
-                            <Route path="/products" element={<Products />} />
+                            <Route
+                                path="/products"
+                                element={<ProductsPage />}
+                            />
                             <Route path="/users" element={<Users />} />
                             <Route path="/notes" element={<Notes />} />
                         </Route>
