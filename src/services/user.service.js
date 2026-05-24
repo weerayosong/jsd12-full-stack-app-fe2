@@ -2,7 +2,10 @@ const API_URL = "http://localhost:3002/api/v2/users";
 
 export const UserService = {
     getAll: async () => {
-        const response = await fetch(API_URL, { method: "GET" });
+        const response = await fetch(API_URL, {
+            method: "GET",
+            credentials: "include",
+        });
         const result = await response.json();
         if (!response.ok)
             throw new Error(result.message || "Failed to fetch users");
@@ -13,6 +16,7 @@ export const UserService = {
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify(userData),
         });
         const result = await response.json();
@@ -25,6 +29,7 @@ export const UserService = {
         const response = await fetch(`${API_URL}/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify(userData),
         });
         const result = await response.json();
@@ -34,7 +39,10 @@ export const UserService = {
     },
 
     delete: async (id) => {
-        const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: "DELETE",
+            credentials: "include",
+        });
         const result = await response.json();
         if (!response.ok)
             throw new Error(result.message || "Failed to delete user");

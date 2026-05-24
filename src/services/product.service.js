@@ -6,7 +6,7 @@ export const ProductService = {
         const response = await fetch(API_URL, {
             method: "GET",
             headers: { "Content-Type": "application/json" },
-            // credentials: 'include'
+            credentials: "include",
         });
 
         const result = await response.json();
@@ -24,6 +24,7 @@ export const ProductService = {
         const response = await fetch(API_URL, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify(productData),
         });
         const result = await response.json();
@@ -37,6 +38,7 @@ export const ProductService = {
         const response = await fetch(`${API_URL}/${id}`, {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
             body: JSON.stringify(productData),
         });
         const result = await response.json();
@@ -50,6 +52,7 @@ export const ProductService = {
         const response = await fetch(`${API_URL}/${id}`, {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
+            credentials: "include",
         });
         const result = await response.json();
         if (!response.ok)

@@ -5,6 +5,7 @@ export default function UserForm({ onSubmit, onCancel, initialData = null }) {
         username: initialData?.username || "",
         email: initialData?.email || "",
         role: initialData?.role || "user",
+        password: "",
     });
 
     const handleChange = (e) => {
@@ -14,7 +15,14 @@ export default function UserForm({ onSubmit, onCancel, initialData = null }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(formData);
+
+        const payload = { ...formData };
+
+        if (initialData && !payload.password) {
+            delete payload.password;
+        }
+
+        onSubmit(payload);
     };
 
     return (
@@ -49,6 +57,27 @@ export default function UserForm({ onSubmit, onCancel, initialData = null }) {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        className="w-full border border-gray-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-slate-500"
+                    />
+                </div>
+                <div>
+                    <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">
+                        Password{" "}
+                        {initialData && (
+                            <span className="text-slate-400 font-normal lowercase">
+                                (leave blank to keep current)
+                            </span>
+                        )}
+                    </label>
+                    <input
+                        required={!initialData}
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        placeholder={
+                            initialData ? "••••••••" : "Enter password"
+                        }
                         className="w-full border border-gray-300 rounded-sm px-3 py-2 text-sm focus:outline-none focus:border-slate-500"
                     />
                 </div>
