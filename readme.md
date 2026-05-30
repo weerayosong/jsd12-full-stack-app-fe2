@@ -9,7 +9,7 @@ https://miro.com/app/board/uXjVHPZzDKc=/?share_link_id=896228414033
 
 ## Lab II: User/Admin Dashboard
 
-![demo-gif](public/proj4.gif)
+![demo-gif](public/proj4b.gif)
 
 ## Concept UI Design
 
@@ -24,5 +24,5 @@ https://miro.com/app/board/uXjVHPZzDKc=/?share_link_id=896228414033
 
 ## Overview
 
-- A single-screen dashboard built with **React**, **Vite**, and **Tailwind CSS v4** to test front-end integration with MongoDB database.
-- Connects to an Express API server running locally on port 3002.
+- A single-screen dashboard built with **React**, **Vite**, and **Tailwind CSS v4** to test front-end integration with MongoDB database. Now running on Vercel.
+- Connects to an Express API server running ~~locally on port 3002.~~ on Render.
