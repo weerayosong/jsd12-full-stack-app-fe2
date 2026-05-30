@@ -1,15 +1,19 @@
-# JSD12 Week13 | Full Stack App (Frontend) II
+# JSD12 Week13 | Full Stack App (Frontend) Lab II
 
-Backend Repo: https://github.com/weerayosong/jsd12-full-stack-app-be (Branch: phase-06_bcrypt)
+Backend Repo: https://github.com/weerayosong/jsd12-full-stack-app-be (Branch: phase-07_deployment)
 
 ## Software Architecture Diagram
 
 React App (Frontend UI)
 https://miro.com/app/board/uXjVHPZzDKc=/?share_link_id=896228414033
 
+## Lab II: User/Admin Dashboard
+
+![demo-gif](public/proj4.gif)
+
 ## Concept UI Design
 
-![crud dashboard that use routes and resources from my api server and db](public/app2.png)
+![crud-dashboard-img](public/app2.png)
 
 ## User Dashboard with API Server
 
