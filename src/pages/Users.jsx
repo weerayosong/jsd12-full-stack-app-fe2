@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useUsers } from "../hooks/useUsers";
-import UserTable from "../components/ui/UserTable";
+import UserCard from "../components/ui/UserCard";
 import UserForm from "../components/ui/UserForm";
 
 export default function Users() {
@@ -70,11 +70,24 @@ export default function Users() {
                     {error}
                 </div>
             ) : (
-                <UserTable
-                    data={users}
-                    onEdit={handleEditClick}
-                    onDelete={deleteUser}
-                />
+                // <UserTable
+                //     data={users}
+                //     onEdit={handleEditClick}
+                //     onDelete={deleteUser}
+                // />
+                // change from 'Table' to grided 'card' style
+                <div className="flex-1 overflow-y-auto min-h-0 pr-1">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
+                        {users.map((user) => (
+                            <UserCard
+                                key={user._id}
+                                user={user}
+                                onEdit={handleEditClick}
+                                onDelete={deleteUser}
+                            />
+                        ))}
+                    </div>
+                </div>
             )}
         </div>
     );

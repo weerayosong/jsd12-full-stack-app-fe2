@@ -36,7 +36,7 @@ export default function Login() {
             <div className="w-full max-w-sm bg-white p-8 border border-gray-200 rounded-sm shadow-sm text-center">
                 <h1 className="text-xl font-bold text-slate-800">Login</h1>
                 <p className="text-xs text-slate-500 mt-1 mb-6">
-                    JSD12 User Dashboard
+                    JSD12 User/Admin Dashboard
                 </p>
 
                 {error && (
