@@ -7,6 +7,7 @@ import MainLayout from "./components/layout/MainLayout";
 import Login from "./pages/Login";
 import ProductsPage from "./pages/Products";
 import UsersPage from "./pages/Users";
+import NotesPage from "./pages/Notes";
 
 // mock pages
 const Dashboard = () => (
@@ -16,13 +17,6 @@ const Dashboard = () => (
             Count Dooku's the great Jedi, even being a Sith one, he's still be
             great people.
         </p>
-    </div>
-);
-
-const Notes = () => (
-    <div>
-        <h1 className="text-2xl font-bold">Notes</h1>
-        <p>Ahsoka. the last one of this Great line, I'm no Jedi.</p>
     </div>
 );
 
@@ -62,7 +56,14 @@ function App() {
                                     </AdminElement>
                                 }
                             />
-                            <Route path="/notes" element={<Notes />} />
+                            <Route
+                                path="/notes"
+                                element={
+                                    <AdminElement>
+                                        <NotesPage />
+                                    </AdminElement>
+                                }
+                            />
                         </Route>
                     </Route>
 
