@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3002/api/v2/notes";
+const API_URL = `${import.meta.env.VITE_API_URL || "http://localhost:3002/api/v2"}/notes`;
 
 export const NoteService = {
     getAll: async () => {
