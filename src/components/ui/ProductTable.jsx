@@ -1,4 +1,4 @@
-export default function ProductTable({ data, onEdit, onDelete }) {
+export default function ProductTable({ data, onEdit, onDelete, isAdmin }) {
     if (data.length === 0) {
         return (
             <div className="p-8 text-center text-slate-500">
@@ -16,7 +16,9 @@ export default function ProductTable({ data, onEdit, onDelete }) {
                         <th className="px-6 py-4">Category</th>
                         <th className="px-6 py-4">Price</th>
                         <th className="px-6 py-4">Status</th>
-                        <th className="px-6 py-4 text-center">Action</th>
+                        {isAdmin && (
+                            <th className="px-6 py-4 text-center">Action</th>
+                        )}
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -47,20 +49,22 @@ export default function ProductTable({ data, onEdit, onDelete }) {
                                     </span>
                                 )}
                             </td>
-                            <td className="px-6 py-4 text-center space-x-3">
-                                <button
-                                    onClick={() => onEdit(item)}
-                                    className="text-slate-600 hover:text-slate-800 font-medium transition-colors text-xs"
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    onClick={() => onDelete(item._id)}
-                                    className="text-red-500 hover:text-red-700 font-medium px-2 py-1 transition-colors text-xs"
-                                >
-                                    Delete
-                                </button>
-                            </td>
+                            {isAdmin && (
+                                <td className="px-6 py-4 text-center space-x-3">
+                                    <button
+                                        onClick={() => onEdit(item)}
+                                        className="text-slate-600 hover:text-slate-800 font-medium transition-colors text-xs"
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        onClick={() => onDelete(item._id)}
+                                        className="text-red-500 hover:text-red-700 font-medium px-2 py-1 transition-colors text-xs"
+                                    >
+                                        Delete
+                                    </button>
+                                </td>
+                            )}
                         </tr>
                     ))}
                 </tbody>

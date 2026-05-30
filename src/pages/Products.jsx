@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useProducts } from "../hooks/useProducts";
 import ProductForm from "../components/ui/ProductForm";
 import ProductTable from "../components/ui/ProductTable";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function Products() {
     const {
@@ -16,6 +17,9 @@ export default function Products() {
 
     const [editingProduct, setEditingProduct] = useState(null);
 
+    const { user } = useAuth();
+    const isAdmin = user?.role === "admin";
+
     const handleCloseForm = () => {
         setShowForm(false);
         setEditingProduct(null);
@@ -29,10 +33,8 @@ export default function Products() {
     const handleSubmit = async (formData) => {
         let success;
         if (editingProduct) {
-            // โหมดแก้ไข
             success = await updateProduct(editingProduct._id, formData);
         } else {
-            // โหมดสร้างใหม่
             success = await addProduct(formData);
         }
 
@@ -50,7 +52,7 @@ export default function Products() {
                         Manage your store items
                     </p>
                 </div>
-                {!showForm && (
+                {!showForm && isAdmin && (
                     <button
                         onClick={() => setShowForm(true)}
                         className="bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 text-sm font-medium rounded-sm transition-colors shadow-sm"
@@ -82,6 +84,7 @@ export default function Products() {
                     data={products}
                     onEdit={handleEditClick}
                     onDelete={deleteProduct}
+                    isAdmin={isAdmin}
                 />
             )}
         </div>
