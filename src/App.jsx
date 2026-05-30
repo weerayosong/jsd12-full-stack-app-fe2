@@ -8,22 +8,21 @@ import Login from "./pages/Login";
 import ProductsPage from "./pages/Products";
 import UsersPage from "./pages/Users";
 import NotesPage from "./pages/Notes";
+import DashboardPage from "./pages/Dashboard";
+import ProfilePage from "./pages/Profile";
 
-// mock pages
-const Dashboard = () => (
-    <div>
-        <h1 className="text-2xl font-bold">Dashboard</h1>
-        <p>
-            Count Dooku's the great Jedi, even being a Sith one, he's still be
-            great people.
-        </p>
-    </div>
-);
+const RootRedirect = () => {
+    const { user } = useAuth();
+    if (user?.role === "admin") {
+        return <Navigate to="/dashboard" replace />;
+    }
+    return <Navigate to="/profile" replace />;
+};
 
 const AdminElement = ({ children }) => {
     const { user } = useAuth();
     if (user?.role !== "admin") {
-        return <Navigate to="/dashboard" replace />;
+        return <Navigate to="/profile" replace />;
     }
     return children;
 };
@@ -39,11 +38,16 @@ function App() {
                     {/* protected routes */}
                     <Route element={<ProtectedRoute />}>
                         <Route element={<MainLayout />}>
+                            <Route path="/" element={<RootRedirect />} />
+                            <Route path="/profile" element={<ProfilePage />} />
                             <Route
-                                path="/"
-                                element={<Navigate to="/dashboard" replace />}
+                                path="/dashboard"
+                                element={
+                                    <AdminElement>
+                                        <DashboardPage />
+                                    </AdminElement>
+                                }
                             />
-                            <Route path="/dashboard" element={<Dashboard />} />
                             <Route
                                 path="/products"
                                 element={<ProductsPage />}

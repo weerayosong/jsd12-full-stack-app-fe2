@@ -1,7 +1,13 @@
 import { NavLink } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
 
-import { FaChartPie, FaBoxOpen, FaUsers, FaNoteSticky } from "react-icons/fa6";
+import {
+    FaChartPie,
+    FaBoxOpen,
+    FaUsers,
+    FaNoteSticky,
+    FaUserAstronaut,
+} from "react-icons/fa6";
 
 export default function Sidebar({ isOpen, setIsOpen }) {
     const { user } = useAuth();
@@ -34,10 +40,18 @@ export default function Sidebar({ isOpen, setIsOpen }) {
                     Main Menu
                 </p>
 
-                <NavLink to="/dashboard" className={navClass}>
-                    <FaChartPie className="text-lg opacity-80" /> Dashboard
-                    Overview
-                </NavLink>
+                {isAdmin ? (
+                    <NavLink to="/dashboard" className={navClass}>
+                        <FaChartPie className="text-lg opacity-80" /> Dashboard
+                        Overview
+                    </NavLink>
+                ) : (
+                    <NavLink to="/profile" className={navClass}>
+                        <FaUserAstronaut className="text-lg opacity-80" /> My
+                        Profile
+                    </NavLink>
+                )}
+
                 <NavLink to="/products" className={navClass}>
                     <FaBoxOpen className="text-lg opacity-80" /> Products
                     Inventory
